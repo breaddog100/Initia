@@ -190,13 +190,14 @@ function delegate_self_validator() {
 
 # 卸载节点功能
 function uninstall_node() {
-    echo "你确定要卸载initia 节点程序吗？这将会删除所有相关的数据。[Y/N]"
+    echo "确定要卸载initia节点吗？这将会删除所有相关的数据。[Y/N]"
     read -r -p "请确认: " response
 
     case "$response" in
         [yY][eE][sS]|[yY]) 
             echo "开始卸载节点程序..."
-            pm2 stop initiad && pm2 delete initiad
+            systemctl stop initiad
+            systemctl stop slinkyd
             rm -rf $HOME/.initiad && rm -rf $HOME/initia $(which initiad) && rm -rf $HOME/.initia
             echo "节点程序卸载完成。"
             ;;
