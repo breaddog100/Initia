@@ -175,8 +175,8 @@ function check_balance(){
 # 质押代币
 function delegate_self_validator() {
     read -p "钱包名称: " wallet_name
-    read -p "质押数量: " math
-    math=$math*1000000
+    read -p "质押数量: " input
+    math=$((input * 1000000))
     initiad tx mstaking delegate $(initiad keys show $wallet_name --bech val -a) ${math}uinit --from $wallet_name --chain-id initiation-1 --gas=2000000 --fees=300000uinit -y
 }
 
