@@ -138,7 +138,7 @@ function import_wallet() {
 
 # 创建验证者
 function add_validator() {
-    #echo "钱包余额需大于20000ubbn，否则创建失败..."
+    echo "先填表：https://forms.gle/LtxqGcJPNYXwwkxP9，不然官方不通过"
     read -p "验证者名称:" validator_name
     read -r -p "请输入你的钱包名称: " wallet_name
     
@@ -214,6 +214,9 @@ function main_menu() {
 	    echo "===================Initia 一键部署脚本==================="
 		echo "沟通电报群：https://t.me/lumaogogogo"
 		echo "推荐配置：4C16G1T"
+		echo "感谢以下无私的分享者："
+    	echo "langzishu.eth 提供了验证者申请链接"
+    	echo "===============桃花潭水深千尺，不及汪伦送我情================="
 	    echo "请选择要执行的操作:"
 	    echo "1. 部署节点 install_node"
 	    echo "2. 下载快照 download_snap"
