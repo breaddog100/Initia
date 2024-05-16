@@ -108,7 +108,7 @@ EOF
 function download_snap(){
 	echo "快照文件较大，下载需要较长时间，请保持电脑屏幕不要熄灭"
     read -p "浏览器打开https://polkachu.com/testnets/initia/snapshots选择最新快照文件，输入[ initia_数字.tar.lz4 ]具体名称: " filename
-    
+    source $HOME/.bash_profile
     # 下载快照
     if wget -P $HOME/ https://snapshots.polkachu.com/testnet-snapshots/initia/$filename ;
     then
