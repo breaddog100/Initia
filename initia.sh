@@ -31,7 +31,7 @@ function install_node() {
     cd $HOME
     git clone https://github.com/initia-labs/initia
 	cd initia
-	TAG=v0.2.12
+	TAG=v0.2.14
 	git checkout $TAG # Tag the desired version
 	make install
 	initiad version
@@ -112,11 +112,11 @@ function download_snap(){
     # 下载快照
     if wget -P $HOME/ https://snapshots.polkachu.com/testnet-snapshots/initia/$filename ;
     then
-        systemctl stop initiad
+        sudo systemctl stop initiad
     	initiad tendermint unsafe-reset-all --home $HOME/.initia --keep-addr-book
     	lz4 -c -d $filename | tar -x -C $HOME/.initia
         # 启动节点进程
-        systemctl start initiad
+        sudo systemctl start initiad
     else
         echo "下载失败。"
         exit 1
