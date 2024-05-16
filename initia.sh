@@ -44,8 +44,7 @@ function install_node() {
 
     sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0.15uinit,0.01uusdc\"|" $HOME/.initia/config/app.toml
     sed -i -e 's|^seeds *=.*|seeds = $seeds|' $HOME/.initia/config/config.toml
-    sed -i 's|^persistent_peers *=.*|persistent_peers = "'"$PEERS"'"|' "$HOME/.initia/config/config.toml"
-	#sed -i -e 's/external_address = \"\"/external_address = \"'$(curl httpbin.org/ip | jq -r .origin)':26656\"/g' ~/.initia/config/config.toml
+    sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.initia/config/config.toml
 	
 	sudo tee /etc/systemd/system/initiad.service > /dev/null <<EOF
 [Unit]
