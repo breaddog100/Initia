@@ -35,6 +35,7 @@ function install_node() {
 	git checkout $TAG # Tag the desired version
 	make install
 	initiad version
+	source $HOME/.bash_profile
 	
 	initiad init $NODE_MONIKER
 	curl -Ls https://initia.s3.ap-southeast-1.amazonaws.com/initiation-1/genesis.json > $HOME/.initia/config/genesis.json
