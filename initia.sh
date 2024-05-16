@@ -43,7 +43,7 @@ function install_node() {
 	seeds="2eaa272622d1ba6796100ab39f58c75d458b9dbc@34.142.181.82:26656,c28827cb96c14c905b127b92065a3fb4cd77d7f6@testnet-seeds.whispernode.com:25756,ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@testnet-seeds.polkachu.com:25756"
 
     sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0.15uinit,0.01uusdc\"|" $HOME/.initia/config/app.toml
-    sed -i -e 's|^seeds *=.*|seeds = $seeds|' $HOME/.initia/config/config.toml
+    sed -i 's|^seeds *=.*|seeds = "'$seeds'"|' $HOME/.initia/config/config.toml
     sed -i 's|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.initia/config/config.toml
 	
 	sudo tee /etc/systemd/system/initiad.service > /dev/null <<EOF
@@ -55,8 +55,8 @@ Type=simple
 User=$USER
 ExecStart=$(which initiad) start
 Restart=on-abort
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 SyslogIdentifier=initiad
 LimitNOFILE=65535
 
