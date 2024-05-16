@@ -6,7 +6,7 @@ function install_node() {
 	read -p "节点名称:" NODE_MONIKER
 	
     sudo apt update
-    sudo apt install -y make build-essential snap jq
+    sudo apt install -y make build-essential snap jq git
     sudo snap install lz4
 
 	# 安装 Go
@@ -64,9 +64,9 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 
-    systemctl enable initiad
-    systemctl daemon-reload
-	systemctl restart initiad
+    sudo systemctl enable initiad
+    sudo systemctl daemon-reload
+	sudo systemctl restart initiad
     
     # Oracle
     git clone https://github.com/skip-mev/slinky.git
@@ -93,9 +93,9 @@ User=$USER
 [Install]
 WantedBy=multi-user.target
 EOF
-	systemctl enable slinkyd
-    systemctl daemon-reload
-	systemctl restart slinkyd
+	sudo systemctl enable slinkyd
+    sudo systemctl daemon-reload
+	sudo systemctl restart slinkyd
        
 	# Run with the core oracle config from the repo.
 	#./build/slinky --oracle-config-path ./config/core/oracle.json --market-map-endpoint 0.0.0.0:9090
