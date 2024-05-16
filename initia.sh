@@ -142,16 +142,7 @@ function add_validator() {
     read -p "验证者名称:" validator_name
     read -r -p "请输入你的钱包名称: " wallet_name
     
-    initiad tx mstaking create-validator \
-    --amount="1000000uinit" \
-    --pubkey=$(initiad tendermint show-validator) \
-    --moniker="$validator_name" \
-    --identity="" \
-    --chain-id="initiation-1" \
-    --from="$wallet_name" \
-    --commission-rate="0.10" \
-    --commission-max-rate="0.20" \
-    --commission-max-change-rate="0.01"
+    initiad tx mstaking create-validator --amount="1000000uinit" --pubkey=$(initiad tendermint show-validator) --moniker="$validator_name" --identity="" --chain-id="initiation-1" --from="$wallet_name" --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01"
 }
 
 # 查看验证者公钥
