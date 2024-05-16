@@ -126,18 +126,21 @@ function download_snap(){
 # 创建钱包
 function create_wallet(){
     # 创建钱包
+    source $HOME/.bash_profile
     read -p "钱包名称:" wallet_name
     initiad keys add $wallet_name
 }
 
 # 导入钱包
 function import_wallet() {
+	source $HOME/.bash_profile
 	read -p "钱包名称:" wallet_name
     initiad keys add $wallet_name --recover
 }
 
 # 创建验证者
 function add_validator() {
+	source $HOME/.bash_profile
     echo "先填表：https://forms.gle/LtxqGcJPNYXwwkxP9，不然官方不通过"
     read -p "验证者名称:" validator_name
     read -r -p "请输入你的钱包名称: " wallet_name
@@ -147,17 +150,20 @@ function add_validator() {
 
 # 查看验证者公钥
 function show_validator_key(){
+	source $HOME/.bash_profile
 	initiad tendermint show-validator
 }
 
 # 申请出狱
 function unjail(){
+	source $HOME/.bash_profile
 	read -p "节点名称:" NODE_MONIKER
 	#initiad tx slashing unjail <validator address>
 }
 
 # 查看节点同步进度
 function check_sync_status() {
+	source $HOME/.bash_profile
     initiad status | jq .sync_info
 }
 
@@ -168,12 +174,14 @@ function view_logs(){
 
 # 查看余额
 function check_balance(){
+	source $HOME/.bash_profile
     read -p "钱包地址:" wallet_addr
     initiad query bank balances "$wallet_addr"
 }
 
 # 质押代币
 function delegate_self_validator() {
+	source $HOME/.bash_profile
     read -p "钱包名称: " wallet_name
     read -p "质押数量: " input
     math=$((input * 1000000))
