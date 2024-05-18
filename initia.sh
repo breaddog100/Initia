@@ -164,7 +164,7 @@ function unjail(){
 # 查看节点同步进度
 function check_sync_status() {
 	source $HOME/.bash_profile
-    initiad status | jq .sync_info
+    initiad status 2>&1 | jq .sync_info
 }
 
 # 查看日志
@@ -188,7 +188,14 @@ function delegate_self_validator() {
     initiad tx mstaking delegate $(initiad keys show $wallet_name --bech val -a) ${math}uinit --from $wallet_name --chain-id initiation-1 --gas=2000000 --fees=300000uinit -y
 }
 
-# 卸载节点功能
+# 更新RPC
+function update_rpc(){
+	read -p "RPC地址: " laddr
+	sed -i "/^\[rpc\]/,/^\[/ s|^laddr = .*|laddr = \"$laddr\"|" $HOME/.initia/config/config.toml
+	sudo systemctl restart initiad
+}
+
+# 卸载节点
 function uninstall_node() {
     echo "确定要卸载initia节点吗？这将会删除所有相关的数据。[Y/N]"
     read -r -p "请确认: " response
@@ -230,6 +237,7 @@ function main_menu() {
 	    echo "10. 查看余额 check_balance"
 	    echo "11. 质押代币 delegate_self_validator"
 	    echo "12. 卸载节点 uninstall_node"
+	    echo "13. 更新RPC update_rpc"
 	    echo "0. 退出脚本exit"
 	    read -p "请输入选项: " OPTION
 	
@@ -246,6 +254,7 @@ function main_menu() {
 	    10) check_balance ;;
 	    11) delegate_self_validator ;;
 	    12) uninstall_node ;;
+	    13) update_rpc ;;
 	    0) echo "退出脚本。"; exit 0 ;;
 	    *) echo "无效选项，请重新输入。"; sleep 3 ;;
 	    esac
